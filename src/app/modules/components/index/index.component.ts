@@ -82,5 +82,13 @@ export class IndexComponent {
       this.updateStart()
     }
   }
+
+  next() {
+    if(this.currentState === 'default') {
+      this.shortBreak()
+    } else {
+      this.default()
+    }
+  }
 }
 
