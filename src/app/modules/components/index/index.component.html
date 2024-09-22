@@ -11,13 +11,22 @@
             <h1 class="num">{{value}}</h1>
         </div>
 
-        <div class="start">
+        <div class="controls">
             @if (isStart === false) {
                 <button (click)="start()">START</button>
             } @else {
                 <button (click)="pause()">PAUSE</button>
             }
         </div>
+
+
+        @if(isStart === true) {
+            <button id="next">
+                <span class="material-symbols-outlined">
+                    arrow_forward
+                </span>
+            </button>
+        }
     </div>
 
 </main>
