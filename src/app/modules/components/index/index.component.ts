@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-index',
@@ -9,15 +10,34 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent {
-    currentState: 'default' | 'shortBreak' | 'longBreak' = 'default';
-    value = 25;
-    intervalId: any;
-    isStart = false
+    // variables
+      currentState: 'default' | 'shortBreak' | 'longBreak' = 'default';
+      minute: number = 25;
+      second: number = 0
+      value = `${this.format(this.minute)}:${this.format(this.second)}`
+      intervalId: any;
+      isStart = false
+      isChecked = true;
   
+    // sounds
+      alarm = new Howl({
+        src: ['assets/alarme.mp3'],
+        volume: 1.0,
+      });
+
+      sound = new Howl({
+        src: ['assets/music.mp3'],
+        volume: 0.5,
+        loop: true
+      });
+    
+    //funcs
     default() {
       this.clearInterval();
       this.currentState = 'default';
-      this.value = 25;
+      this.minute = 25
+      this.second = 0
+      this.value = `${this.format(this.minute)}:${this.format(this.second)}`;
       this.updateMainClass();
       this.updateStart()
     }
@@ -25,7 +45,9 @@ export class IndexComponent {
     shortBreak() {
       this.clearInterval();
       this.currentState = 'shortBreak';
-      this.value = 5;
+      this.minute = 5
+      this.second = 0
+      this.value = `${this.format(this.minute)}:${this.format(this.second)}`;
       this.updateMainClass();
       this.updateStart()
     }
@@ -33,7 +55,9 @@ export class IndexComponent {
     longBreak() {
       this.clearInterval();
       this.currentState = 'longBreak';
-      this.value = 15;
+      this.minute = 15
+      this.second = 0
+      this.value = `${this.format(this.minute)}:${this.format(this.second)}`;
       this.updateMainClass();
       this.updateStart()
     }
@@ -55,19 +79,53 @@ export class IndexComponent {
         this.isStart = false
       }
     }
+
+    format(value: any) {
+      return value < 10 ? value = `0${value}` : value
+    }
   
     start() {
-      this.isStart = true
+      this.isStart = true;
       this.clearInterval();
+    
       this.intervalId = setInterval(() => {
-        this.value -= 1;
-        if(this.value === 0) {
+        if (this.minute === 0 && this.second === 0) {
           this.clearInterval();
+          
+          this.alarm.play()
+
+          setTimeout(() => {
+            this.alarm.stop();
+          }, 5500);
+
+          if(this.currentState === 'longBreak' || this.currentState === 'shortBreak') {
+            setTimeout(() => {
+              this.currentState = 'default'
+              this.default()
+            }, 2000);
+          } else {
+            setTimeout(() => {
+              this.currentState = 'shortBreak'
+              this.shortBreak()
+            }, 2000);
+          }
+
+          return;
         }
+        
+        this.second -= 1;
+    
+        if (this.second < 0) {
+          this.second = 59;
+          this.minute -= 1;
+        }
+    
+        this.value = `${this.format(this.minute)}:${this.format(this.second)}`;
+    
         this.updateMainClass();
       }, 1000);
     }
-  
+    
     clearInterval() {
       if (this.intervalId) {
         clearInterval(this.intervalId);
@@ -88,6 +146,16 @@ export class IndexComponent {
       this.shortBreak()
     } else {
       this.default()
+    }
+  }
+
+  checkCheckbox() {
+    if (this.isChecked) {
+      this.sound.play()
+      this.isChecked = false
+    } else {
+      this.sound.stop()
+      this.isChecked = true
     }
   }
 }

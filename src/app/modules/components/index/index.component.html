@@ -1,6 +1,6 @@
 <main id="main" [ngClass]="currentState">
 
-    <div class="container">
+    <div class="my_container">
         <div class="buttons">
             <button [class.active]="currentState === 'default'" (click)="default()">Pomodoro</button>
             <button [class.active]="currentState === 'shortBreak'" (click)="shortBreak()">Short Break</button>
@@ -9,6 +9,11 @@
 
         <div class="value">
             <h1 class="num">{{value}}</h1>
+        </div>
+
+        <div class="form-check form-switch" id="music">
+            <label for="musicControl">music</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="musicControl" (click)="checkCheckbox()">
         </div>
 
         <div class="controls">
@@ -20,14 +25,13 @@
         </div>
 
 
-        @if(isStart === true) {
-            <button id="next" (click)="next()">
-                <span class="material-symbols-outlined">
-                    arrow_forward
-                </span>
-            </button>
-        }
+            @if(isStart === true) {
+                <button id="next" (click)="next()">
+                    <span class="material-symbols-outlined">
+                        arrow_forward
+                    </span>
+                </button>
+            }
     </div>
-
 </main>
 

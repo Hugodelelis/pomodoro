@@ -5,7 +5,7 @@
         justify-content: center;
         align-items: center;
 
-        .container {
+        .my_container {
             box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
             padding: 1em 8em;
             margin: 0 0.5em;
@@ -18,6 +18,8 @@
 
             .buttons {
                 display: flex;
+                justify-content: center;
+                align-items: center;
 
                 button {
                     background-color: transparent;
@@ -28,20 +30,45 @@
             }
 
             .value {
-                font-size: 40px;
                 color: white;
+
+                .num {
+                    font-size: 80px;
+                }
             }
 
-            .controls button {
-                box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-                padding: 0.8em 4em;
-                font-weight: 700;
-                border: none;
-                transition: 0.4s ease-in-out all;
+            .controls {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1em;
+                
+                button {
+                    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+                    padding: 0.8em 4em;
+                    font-weight: 700;
+                    border: none;
+                    transition: 0.4s ease-in-out all;
 
-                &:hover {
-                    background-color: rgba(87, 85, 85, 0.205) !important;
-                    color: white;
+                    &:hover {
+                        background-color: rgba(87, 85, 85, 0.205) !important;
+                        color: white;
+                    }
+                }
+            }
+
+            #music {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+                bottom: 1.2em;
+                left: 1em;
+
+                label {
+                    margin-right: 25px;
                 }
             }
 
@@ -55,7 +82,7 @@
                 display: flex;
                 justify-content: center;
                 position: absolute;
-                bottom: 1.2em;
+                bottom: 1em;
                 right: 1em;
                 transition: 0.4s ease-in-out all;
 
@@ -71,7 +98,7 @@
             background-color: orange;
             transition: 0.4s ease-in-out all;
 
-            .container {
+            .my_container {
                 background-color: rgb(236, 183, 83);
             }
 
@@ -85,7 +112,7 @@
             background-color: rgb(157, 236, 183);
             transition: 0.4s ease-in-out all;
 
-            .container {
+            .my_container {
                 background-color: rgb(166, 214, 182);
             }
 
@@ -99,7 +126,7 @@
             background-color: cornflowerblue;
             transition: 0.4s ease-in-out all;
 
-            .container {
+            .my_container {
                 background-color: rgb(136, 169, 231);
             }
 
@@ -117,7 +144,7 @@
     }
 
     @media(max-width: 730px) {
-        main .container  {
+        main .my_container  {
             padding: 1em;
         }
     }
