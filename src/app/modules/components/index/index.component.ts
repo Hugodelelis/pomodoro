@@ -31,7 +31,7 @@ export class IndexComponent {
         loop: true
       });
     
-    //funcs
+    // modes funcs
     default() {
       this.clearInterval();
       this.currentState = 'default';
@@ -61,7 +61,8 @@ export class IndexComponent {
       this.updateMainClass();
       this.updateStart()
     }
-  
+    
+    // updates funcs
     updateMainClass() {
       const mainElement = document.querySelector('main');
       const num = document.querySelector('.num');
@@ -84,6 +85,7 @@ export class IndexComponent {
       return value < 10 ? value = `0${value}` : value
     }
   
+    // controls funcs
     start() {
       this.isStart = true;
       this.clearInterval();
