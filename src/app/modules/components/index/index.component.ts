@@ -111,8 +111,6 @@ export class IndexComponent {
               this.shortBreak()
             }, 2000);
           }
-
-          return;
         }
         
         this.second -= 1;
